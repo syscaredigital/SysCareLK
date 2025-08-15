@@ -27,6 +27,7 @@
     "framer-motion": "^12.23.12",
     "humanize-duration": "^3.33.0",
     "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.539.0",
     "quill": "^2.0.3",
     "rc-progress": "^4.0.0",
     "react": "^19.1.1",
