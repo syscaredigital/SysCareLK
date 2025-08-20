@@ -2,6 +2,7 @@ import { GlobeLock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import logo from '/logos/logo.png';
 import DesktopMenu from './DesktopMenu';
+import MobMenu from './MobMenu';
 
 
 //Menus data
@@ -26,7 +27,13 @@ import DesktopMenu from './DesktopMenu';
 
       },
       {
-        name: ""
+       name: "Computer Hacking Forensic Investigator C|HFI",
+       icon: GlobeLock,
+
+      },
+      {
+      name: "EC-Council Certified Incident Handler E|CIH",
+       icon: GlobeLock,
       }
 
 
@@ -44,14 +51,21 @@ export default function NavigationBar() {
           <div className='flex-center gap-x-3 z-[999] relative'>
             <img src= {logo} alt='SysCare Logo' className='h-8 md:h-10 lg:h-12 w-auto object-contain' />
           </div>
-
-          <ul>
+{/*Desktop Menu */}
+          <ul className='lg:flex-center gap-x-1 '>
             {
               Menus.map((menu) => (
                 <DesktopMenu menu={menu} key={menu.name} />
               ))
             }
           </ul>
+          <div className='flex-center gap-x-5'>
+            <button className='bg-white/5 z-[999] relative px-3 py-1.5 shadow rounded-xl flex-center'>Enquiry Now</button>
+            <div className='lg:hidden '>
+              <MobMenu Menus={Menus}/>
+            </div>
+          </div>
+
         </nav>
       </headers>
     </div>
