@@ -1,273 +1,330 @@
-import { Shield, Cloud, Server, Lock, Zap, BookOpen, Clock, Users, Star, ArrowRight } from 'lucide-react';
-import { useState } from 'react';
-const TrainingCourses = () => {
-  const courses = [
-    {
-      id: 1,
-      title: "Certified Network Defender (CND)",
-      code: "CND",
-      description: "Learn network defense fundamentals, security controls, protocols, perimeter appliances, secure IDS, VPN and firewall configuration.",
-      duration: "6 Weeks",
-      level: "Intermediate",
-      students: "2.5k+",
-      rating: 4.8,
-      icon: <Shield className="text-blue-500" size={24} />,
-      category: "CyberSecurity",
-      bgColor: "bg-blue-500/10",
-      borderColor: "border-blue-500/20"
-    },
-    {
-      id: 2,
-      title: "Certified Ethical Hacker (CEH)",
-      code: "CEH",
-      description: "Master ethical hacking techniques, penetration testing, vulnerability assessment, and security auditing.",
-      duration: "8 Weeks",
-      level: "Advanced",
-      students: "4.2k+",
-      rating: 4.9,
-      icon: <Lock className="text-green-500" size={24} />,
-      category: "CyberSecurity",
-      bgColor: "bg-green-500/10",
-      borderColor: "border-green-500/20"
-    },
-    {
-      id: 3,
-      title: "Microsoft Azure Fundamentals (AZ-900)",
-      code: "AZ-900",
-      description: "Understand cloud concepts, Azure services, security, privacy, compliance, and trust in Azure.",
-      duration: "4 Weeks",
-      level: "Beginner",
-      students: "5.7k+",
-      rating: 4.7,
-      icon: <Cloud className="text-cyan-500" size={24} />,
-      category: "Microsoft Azure",
-      bgColor: "bg-cyan-500/10",
-      borderColor: "border-cyan-500/20"
-    },
-    {
-      id: 4,
-      title: "Microsoft Azure Administrator (AZ-104)",
-      code: "AZ-104",
-      description: "Implement, manage, and monitor identity, governance, storage, compute, and virtual networks in a cloud environment.",
-      duration: "8 Weeks",
-      level: "Intermediate",
-      students: "3.8k+",
-      rating: 4.8,
-      icon: <Server className="text-purple-500" size={24} />,
-      category: "Microsoft Azure",
-      bgColor: "bg-purple-500/10",
-      borderColor: "border-purple-500/20"
-    },
-    {
-      id: 5,
-      title: "Microsoft 365 Fundamentals (MS-900)",
-      code: "MS-900",
-      description: "Learn about cloud concepts, Microsoft 365 products and services, security, compliance, privacy, and trust.",
-      duration: "4 Weeks",
-      level: "Beginner",
-      students: "3.1k+",
-      rating: 4.6,
-      icon: <Zap className="text-amber-500" size={24} />,
-      category: "Microsoft 365",
-      bgColor: "bg-amber-500/10",
-      borderColor: "border-amber-500/20"
-    },
-    {
-      id: 6,
-      title: "EC-Council Incident Handler (ECIH)",
-      code: "ECIH",
-      description: "Handle and respond to security incidents, identify vulnerabilities and prevent information security breaches.",
-      duration: "6 Weeks",
-      level: "Intermediate",
-      students: "1.9k+",
-      rating: 4.7,
-      icon: <Lock className="text-red-500" size={24} />,
-      category: "CyberSecurity",
-      bgColor: "bg-red-500/10",
-      borderColor: "border-red-500/20"
-    },
-    {
-      id: 7,
-      title: "Computer Hacking Forensic Investigator (CHFI)",
-      code: "CHFI",
-      description: "Learn computer forensics, evidence analysis, data recovery, and investigating cyber crimes.",
-      duration: "10 Weeks",
-      level: "Advanced",
-      students: "2.3k+",
-      rating: 4.9,
-      icon: <Shield className="text-indigo-500" size={24} />,
-      category: "CyberSecurity",
-      bgColor: "bg-indigo-500/10",
-      borderColor: "border-indigo-500/20"
-    }
-  ];
+import React, { useState } from 'react';
 
-  const categories = ["All", "CyberSecurity", "Microsoft Azure", "Microsoft 365"];
+const CoursesSection = () => {
+  const [activeCategory, setActiveCategory] = useState('Cybersecurity');
 
-  const [activeCategory, setActiveCategory] = useState("All");
-
-  const filteredCourses = activeCategory === "All" 
-    ? courses 
-    : courses.filter(course => course.category === activeCategory);
+  // Sample course data for each category
+  const courseCategories = {
+    Cybersecurity: [
+      {
+        id: 1,
+        title: "Introduction to Cybersecurity",
+        description: "Learn the fundamentals of cybersecurity principles and practices",
+        level: "Beginner",
+        duration: "6 weeks",
+        lessons: 24,
+        rating: 4.8,
+        students: 12500,
+        price: "$89.99"
+      },
+      {
+        id: 2,
+        title: "Ethical Hacking Fundamentals",
+        description: "Understand ethical hacking techniques and penetration testing",
+        level: "Intermediate",
+        duration: "8 weeks",
+        lessons: 32,
+        rating: 4.7,
+        students: 8700,
+        price: "$94.99"
+      },
+      {
+        id: 3,
+        title: "Network Security Essentials",
+        description: "Master network security protocols and defense mechanisms",
+        level: "Intermediate",
+        duration: "7 weeks",
+        lessons: 28,
+        rating: 4.9,
+        students: 10200,
+        price: "$79.99"
+      },
+      {
+        id: 4,
+        title: "Cyber Threat Intelligence",
+        description: "Learn to identify and analyze cyber threats",
+        level: "Advanced",
+        duration: "5 weeks",
+        lessons: 20,
+        rating: 4.6,
+        students: 5600,
+        price: "$109.99"
+      },
+      {
+        id: 5,
+        title: "Security Operations Center (SOC)",
+        description: "Develop skills for working in a Security Operations Center",
+        level: "Advanced",
+        duration: "9 weeks",
+        lessons: 36,
+        rating: 4.8,
+        students: 7200,
+        price: "$119.99"
+      }
+    ],
+    MicrosoftAzure: [
+      {
+        id: 1,
+        title: "Azure Fundamentals (AZ-900)",
+        description: "Prepare for the AZ-900 certification with comprehensive training",
+        level: "Beginner",
+        duration: "4 weeks",
+        lessons: 16,
+        rating: 4.7,
+        students: 18900,
+        price: "$79.99"
+      },
+      {
+        id: 2,
+        title: "Azure Administrator (AZ-104)",
+        description: "Master Azure administration and management",
+        level: "Intermediate",
+        duration: "8 weeks",
+        lessons: 32,
+        rating: 4.8,
+        students: 12500,
+        price: "$99.99"
+      },
+      {
+        id: 3,
+        title: "Azure Solutions Architect",
+        description: "Design solutions on Microsoft Azure",
+        level: "Advanced",
+        duration: "10 weeks",
+        lessons: 40,
+        rating: 4.9,
+        students: 9800,
+        price: "$129.99"
+      },
+      {
+        id: 4,
+        title: "Azure DevOps Engineering",
+        description: "Implement DevOps practices using Azure tools",
+        level: "Intermediate",
+        duration: "7 weeks",
+        lessons: 28,
+        rating: 4.7,
+        students: 11200,
+        price: "$94.99"
+      },
+      {
+        id: 5,
+        title: "Azure Security Technologies",
+        description: "Secure your Azure cloud environment effectively",
+        level: "Advanced",
+        duration: "6 weeks",
+        lessons: 24,
+        rating: 4.8,
+        students: 8400,
+        price: "$109.99"
+      }
+    ],
+    Microsoft365: [
+      {
+        id: 1,
+        title: "Microsoft 365 Fundamentals",
+        description: "Get started with Microsoft 365 applications and services",
+        level: "Beginner",
+        duration: "3 weeks",
+        lessons: 12,
+        rating: 4.6,
+        students: 21500,
+        price: "$69.99"
+      },
+      {
+        id: 2,
+        title: "Microsoft Teams Mastery",
+        description: "Become proficient in Microsoft Teams for collaboration",
+        level: "Intermediate",
+        duration: "4 weeks",
+        lessons: 16,
+        rating: 4.8,
+        students: 17800,
+        price: "$79.99"
+      },
+      {
+        id: 3,
+        title: "Power Platform Fundamentals",
+        description: "Learn Power Apps, Power Automate, and Power BI",
+        level: "Intermediate",
+        duration: "6 weeks",
+        lessons: 24,
+        rating: 4.7,
+        students: 13200,
+        price: "$89.99"
+      },
+      {
+        id: 4,
+        title: "Advanced SharePoint Online",
+        description: "Master SharePoint Online for document management",
+        level: "Advanced",
+        duration: "5 weeks",
+        lessons: 20,
+        rating: 4.8,
+        students: 9500,
+        price: "$94.99"
+      },
+      {
+        id: 5,
+        title: "Microsoft 365 Security Administration",
+        description: "Manage security in Microsoft 365 environment",
+        level: "Advanced",
+        duration: "7 weeks",
+        lessons: 28,
+        rating: 4.9,
+        students: 7800,
+        price: "$109.99"
+      }
+    ],
+    MicrosoftSecurity: [
+      {
+        id: 1,
+        title: "Microsoft Security Fundamentals",
+        description: "Understand Microsoft's security framework and tools",
+        level: "Beginner",
+        duration: "4 weeks",
+        lessons: 16,
+        rating: 4.7,
+        students: 14200,
+        price: "$79.99"
+      },
+      {
+        id: 2,
+        title: "Identity and Access Management",
+        description: "Master Azure Active Directory and identity solutions",
+        level: "Intermediate",
+        duration: "6 weeks",
+        lessons: 24,
+        rating: 4.8,
+        students: 10800,
+        price: "$94.99"
+      },
+      {
+        id: 3,
+        title: "Microsoft Defender Suite",
+        description: "Implement and manage Microsoft Defender products",
+        level: "Advanced",
+        duration: "8 weeks",
+        lessons: 32,
+        rating: 4.9,
+        students: 8900,
+        price: "$119.99"
+      },
+      {
+        id: 4,
+        title: "Security Compliance Manager",
+        description: "Learn to manage compliance with Microsoft tools",
+        level: "Intermediate",
+        duration: "5 weeks",
+        lessons: 20,
+        rating: 4.7,
+        students: 7600,
+        price: "$89.99"
+      },
+      {
+        id: 5,
+        title: "Advanced Threat Protection",
+        description: "Implement advanced threat protection measures",
+        level: "Advanced",
+        duration: "7 weeks",
+        lessons: 28,
+        rating: 4.8,
+        students: 6800,
+        price: "$109.99"
+      }
+    ]
+  };
 
   return (
-    <section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-br from-gray-900 to-gray-800 overflow-hidden">
-      {/* Cyber Lines Background */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 left-0 w-full h-0.5 bg-cyan-400/30"></div>
-        <div className="absolute top-10 left-0 w-full h-0.5 bg-blue-400/20"></div>
-        <div className="absolute top-20 left-0 w-full h-0.5 bg-cyan-400/30"></div>
-        <div className="absolute top-1/3 left-0 w-full h-0.5 bg-blue-400/20"></div>
-        <div className="absolute top-1/2 left-0 w-full h-0.5 bg-cyan-400/30"></div>
-        <div className="absolute bottom-20 left-0 w-full h-0.5 bg-blue-400/20"></div>
-        <div className="absolute bottom-10 left-0 w-full h-0.5 bg-cyan-400/30"></div>
-        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-400/20"></div>
-        
-        {/* Vertical lines */}
-        <div className="absolute top-0 left-10 h-full w-0.5 bg-cyan-400/20"></div>
-        <div className="absolute top-0 left-1/4 h-full w-0.5 bg-blue-400/10"></div>
-        <div className="absolute top-0 left-1/2 h-full w-0.5 bg-cyan-400/20"></div>
-        <div className="absolute top-0 left-3/4 h-full w-0.5 bg-blue-400/10"></div>
-        <div className="absolute top-0 right-10 h-full w-0.5 bg-cyan-400/20"></div>
-      </div>
-      
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+    <section className="py-16 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Our <span className="text-cyan-400">Professional</span> Training Courses
-          </h2>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-            Advance your career with industry-recognized certifications in cybersecurity and cloud technologies. 
-            Learn from experts and gain hands-on experience with real-world scenarios.
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#103d5d]">Explore Our Courses</h2>
+          <div className="mt-4 h-1 w-20 bg-[#245684] mx-auto"></div>
+          <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
+            Browse our specialized courses in key technology areas to advance your career
           </p>
         </div>
 
-        {/* Category Filters */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category) => (
+        {/* Category Tabs */}
+        <div className="flex flex-wrap justify-center mb-12 gap-4">
+          {Object.keys(courseCategories).map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+              className={`px-6 py-3 rounded-lg font-medium text-lg transition-all duration-300 ${
                 activeCategory === category
-                  ? "bg-cyan-500 text-white"
-                  : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 border border-cyan-500/20"
+                  ? 'bg-[#245684] text-white shadow-md'
+                  : 'bg-white text-[#103d5d] border border-[#245684] hover:bg-[#245684] hover:text-white'
               }`}
             >
-              {category}
+              {category.replace(/([A-Z])/g, ' $1')}
             </button>
           ))}
         </div>
 
         {/* Courses Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {filteredCourses.map((course) => (
-            <div 
-              key={course.id} 
-              className={`rounded-2xl overflow-hidden border ${course.borderColor} transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/10`}
-            >
-              <div className={`p-6 ${course.bgColor} border-b ${course.borderColor}`}>
-                <div className="flex justify-between items-start mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-gray-800/50 flex items-center justify-center">
-                    {course.icon}
-                  </div>
-                  <span className="text-xs font-medium px-3 py-1 rounded-full bg-gray-800/50 text-cyan-300">
-                    {course.code}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {courseCategories[activeCategory].map((course) => (
+            <div key={course.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+              <div className="h-48 bg-gradient-to-r from-[#103d5d] to-[#245684] p-6 text-white flex flex-col justify-between">
+                <div>
+                  <span className="inline-block px-3 py-1 bg-white bg-opacity-20 rounded-full text-sm">
+                    {course.level}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">{course.title}</h3>
-                <p className="text-gray-300 text-sm mb-4">{course.description}</p>
+                <div>
+                  <h3 className="text-xl font-bold mb-2">{course.title}</h3>
+                  <p className="text-sm opacity-90">{course.description}</p>
+                </div>
               </div>
-              
-              <div className="p-6 bg-gray-800/30">
+              <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
                   <div className="flex items-center">
-                    <Clock size={16} className="text-cyan-400 mr-1" />
-                    <span className="text-sm text-gray-300">{course.duration}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <BookOpen size={16} className="text-cyan-400 mr-1" />
-                    <span className="text-sm text-gray-300">{course.level}</span>
+                    <svg className="w-5 h-5 text-yellow-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <span className="text-gray-700 font-medium">{course.rating}</span>
+                    <span className="text-gray-500 ml-2">({(course.students / 1000).toFixed(0)}k students)</span>
                   </div>
                 </div>
                 
-                <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between text-sm text-gray-600 mb-6">
                   <div className="flex items-center">
-                    <Users size={16} className="text-cyan-400 mr-1" />
-                    <span className="text-sm text-gray-300">{course.students}</span>
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {course.duration}
                   </div>
                   <div className="flex items-center">
-                    <Star size={16} className="text-amber-400 mr-1" fill="currentColor" />
-                    <span className="text-sm text-gray-300">{course.rating}</span>
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    {course.lessons} lessons
                   </div>
                 </div>
                 
-                <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center group">
-                  <span>View Course Details</span>
-                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
-                </button>
+                <div className="flex justify-between items-center">
+                  <span className="text-2xl font-bold text-[#245684]">{course.price}</span>
+                  <button className="px-4 py-2 bg-[#245684] hover:bg-[#1a4066] text-white rounded-md text-sm font-medium transition duration-300">
+                    Enroll Now
+                  </button>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Certification Partners */}
-        <div className="bg-gray-800/30 rounded-2xl p-8 border border-cyan-500/20">
-          <h3 className="text-2xl font-bold text-white text-center mb-8">
-            Our <span className="text-cyan-400">Certification</span> Partners
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-4">
-                <Shield className="text-blue-400" size={32} />
-              </div>
-              <h4 className="text-white font-medium text-center">EC-Council</h4>
-            </div>
-            
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 bg-cyan-500/10 rounded-full flex items-center justify-center mb-4">
-                <Cloud className="text-cyan-400" size={32} />
-              </div>
-              <h4 className="text-white font-medium text-center">Microsoft</h4>
-            </div>
-            
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mb-4">
-                <Lock className="text-green-400" size={32} />
-              </div>
-              <h4 className="text-white font-medium text-center">CompTIA</h4>
-            </div>
-            
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mb-4">
-                <Server className="text-purple-400" size={32} />
-              </div>
-              <h4 className="text-white font-medium text-center">AWS</h4>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
-            Ready to <span className="text-cyan-400">Advance</span> Your Career?
-          </h3>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join thousands of professionals who have transformed their careers with our industry-recognized certification programs.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
-              <span>Explore All Courses</span>
-              <ArrowRight className="ml-2" size={20} />
-            </button>
-            <button className="bg-transparent hover:bg-white/10 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 border border-cyan-500/30 hover:border-cyan-500/50">
-              Speak to an Advisor
-            </button>
-          </div>
+        {/* View All Button */}
+        <div className="text-center mt-12">
+          <button className="px-8 py-3 bg-white border border-[#245684] text-[#245684] hover:bg-[#245684] hover:text-white rounded-md font-medium transition duration-300">
+            View All Courses in {activeCategory.replace(/([A-Z])/g, ' $1')}
+          </button>
         </div>
       </div>
     </section>
   );
 };
 
-export default TrainingCourses;
+export default CoursesSection;

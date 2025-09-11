@@ -1,412 +1,190 @@
-import { useState, useEffect } from 'react';
-import { Play, Users, Award, BookOpen, Star, ChevronRight, ChevronLeft, ChevronDown, Zap, Cpu, Code, Shield } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
 const Hero = () => {
-  const [typedText, setTypedText] = useState('');
   const [currentSlide, setCurrentSlide] = useState(0);
-  const words = ['CyberSecurity', 'Microsoft Azure', 'Microsoft 365', 'Cloud Computing'];
-  const [wordIndex, setWordIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(150);
-
-  // Banner slides data
-  const bannerSlides = [
+  
+  // Sample course data
+  const courses = [
     {
-      title: "Microsoft Azure Mastery",
-      subtitle: "Cloud Computing Track",
-      description: "Learn to deploy, manage, and monitor cloud applications",
-      progress: 75,
-      modules: "12/16 Modules",
-      rating: 4.9,
+      id: 1,
+      title: "Web Development Bootcamp",
       instructor: "Sarah Johnson",
-      duration: "8 Weeks",
-      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      bgGradient: "from-blue-900/30 to-cyan-900/20",
-      borderColor: "border-cyan-500/30"
-    },
-    {
-      title: "Cybersecurity Essentials",
-      subtitle: "Security Track",
-      description: "Protect systems from cyber threats and attacks",
-      progress: 60,
-      modules: "9/15 Modules",
       rating: 4.8,
+      students: 12500,
+      image: "https://cdn.pixabay.com/photo/2019/10/09/07/28/development-4536630_1280.png",
+      price: "$89.99"
+    },
+    {
+      id: 2,
+      title: "Data Science Fundamentals",
       instructor: "Michael Chen",
-      duration: "10 Weeks",
-      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      bgGradient: "from-green-900/30 to-emerald-900/20",
-      borderColor: "border-green-500/30"
-    },
-    {
-      title: "Microsoft 365 Administration",
-      subtitle: "Productivity Track",
-      description: "Master enterprise productivity and collaboration tools",
-      progress: 45,
-      modules: "6/13 Modules",
       rating: 4.7,
-      instructor: "Jessica Williams",
-      duration: "6 Weeks",
-      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      bgGradient: "from-purple-900/30 to-fuchsia-900/20",
-      borderColor: "border-purple-500/30"
+      students: 8700,
+      image: "https://cdn.pixabay.com/photo/2021/08/04/13/06/software-developer-6521720_1280.jpg",
+      price: "$94.99"
     },
     {
-      title: "Cloud Infrastructure",
-      subtitle: "Advanced Track",
-      description: "Design and implement cloud infrastructure solutions",
-      progress: 30,
-      modules: "4/12 Modules",
+      id: 3,
+      title: "UX/UI Design Masterclass",
+      instructor: "Emma Rodriguez",
       rating: 4.9,
-      instructor: "David Martinez",
-      duration: "12 Weeks",
-      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      bgGradient: "from-orange-900/30 to-red-900/20",
-      borderColor: "border-orange-500/30"
+      students: 10200,
+      image: "https://cdn.pixabay.com/photo/2018/06/18/23/59/design-3483051_1280.jpg",
+      price: "$79.99"
     }
   ];
 
-  // Auto-typing effect
-  useEffect(() => {
-    const handleTyping = () => {
-      const currentWord = words[wordIndex];
-      
-      if (isDeleting) {
-        setTypedText(currentWord.substring(0, typedText.length - 1));
-        setTypingSpeed(100);
-      } else {
-        setTypedText(currentWord.substring(0, typedText.length + 1));
-        setTypingSpeed(150);
-      }
-
-      if (!isDeleting && typedText === currentWord) {
-        setTimeout(() => setIsDeleting(true), 1000);
-      } else if (isDeleting && typedText === '') {
-        setIsDeleting(false);
-        setWordIndex((prevIndex) => (prevIndex + 1) % words.length);
-        setTypingSpeed(500);
-      }
-    };
-
-    const timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [typedText, wordIndex, isDeleting, words, typingSpeed]);
-
-  // Auto-rotate slides
+  // Auto-advance slider
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % bannerSlides.length);
+      setCurrentSlide((prev) => (prev + 1) % courses.length);
     }, 5000);
-    
     return () => clearInterval(interval);
-  }, []);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % bannerSlides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + bannerSlides.length) % bannerSlides.length);
-  };
+  }, [courses.length]);
 
   return (
-    <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 overflow-hidden bg-gray-950">
-      {/* Binary code background animation */}
-      <div className="absolute inset-0 opacity-10 overflow-hidden">
-        {Array.from({ length: 50 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute text-green-400/30 font-mono text-xs animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.1}s`
-            }}
-          >
-            {Math.random() > 0.5 ? '1' : '0'}
-          </div>
-        ))}
-      </div>
+    <div className="relative bg-gradient-to-br from-[#103d5d] to-[#245684] text-white overflow-hidden min-h-screen">
+      {/* Background pattern */}
+      <div className="absolute top-0 right-0 -mr-40 -mt-40 w-80 h-80 bg-white opacity-5 rounded-full"></div>
+      <div className="absolute bottom-0 left-0 -ml-40 -mb-40 w-80 h-80 bg-white opacity-5 rounded-full"></div>
       
-      {/* Circuit board pattern overlay */}
-      <div className="absolute inset-0 opacity-10 bg-circuit-pattern bg-cover bg-center"></div>
-      
-      {/* Grid overlay with cyber style */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-grid-pattern bg-cover bg-center"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-950"></div>
-      </div>
-      
-      {/* Digital particles */}
-      <div className="absolute inset-0 opacity-40">
-        {Array.from({ length: 30 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-cyan-400 rounded-full animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${5 + Math.random() * 10}s`
-            }}
-          ></div>
-        ))}
-      </div>
-      
-      {/* Glowing orbs with cyber colors */}
-      <div className="absolute top-1/4 -left-20 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl animate-pulse-slow"></div>
-      <div className="absolute bottom-1/4 -right-20 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-pulse-slower"></div>
-      <div className="absolute top-3/4 left-1/4 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl animate-pulse-medium"></div>
-      
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="flex flex-col md:flex-row items-center">
-          {/* Left Content */}
-          <div className="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-cyan-900/20 border border-cyan-400/30 text-cyan-400 text-sm mb-6 glow-cyan">
-              <div className="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"></div>
-              Future-ready digital learning
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Master <span className="text-cyan-400">Digital</span><br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
-                {typedText}
-                <span className="animate-pulse">|</span>
-              </span>
-              <br />Technologies
+      <div className="relative max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div className="flex flex-col lg:flex-row items-center">
+          {/* Text content */}
+          <div className="lg:w-1/2 text-center lg:text-left">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+              <span className="block">Unlock Your</span>
+              <span className="block text-white mt-2">Learning Potential</span>
             </h1>
-            
-            <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">
-              Join 50,000+ professionals advancing their careers with our cutting-edge courses in cybersecurity, cloud computing, and Microsoft technologies.
+            <p className="mt-6 text-xl max-w-3xl mx-auto lg:mx-0 opacity-90">
+              Discover a world of knowledge with our interactive courses. Expand your skills, advance your career, and achieve your learning goals with expert instructors.
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-10">
-              <a 
-                href="#" 
-                className="group relative bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-600 hover:to-emerald-600 text-gray-900 px-8 py-4 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyan-400/20 flex items-center cyber-button"
+            <div className="mt-10 flex flex-col sm:flex-row sm:justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+              <a
+                href="#"
+                className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#245684] hover:bg-[#1a4066] shadow-md md:py-4 md:text-lg md:px-10 transition duration-300"
               >
-                <Zap className="mr-2" size={20} fill="currentColor" />
-                <span>Start Learning Now</span>
-                <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                Start Learning
               </a>
-              <a 
-                href="#" 
-                className="group relative bg-transparent hover:bg-white/5 text-white px-8 py-4 rounded-lg font-medium transition-all duration-300 border border-cyan-500/30 hover:border-cyan-500/50 flex items-center glow-cyan-hover"
+              <a
+                href="#"
+                className="px-8 py-3 border border-white text-base font-medium rounded-md text-white bg-transparent hover:bg-white hover:bg-opacity-10 md:py-4 md:text-lg md:px-10 transition duration-300"
               >
-                <Play className="mr-2" size={20} />
-                <span>Watch Demo</span>
+                View Courses
               </a>
             </div>
             
-            {/* Stats with cyber icons */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-md">
-              <div className="text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start">
-                  <div className="relative">
-                    <Users className="text-cyan-400 mr-2" size={20} />
-                    <div className="absolute -inset-1 bg-cyan-400/20 rounded-full blur-sm"></div>
-                  </div>
-                  <span className="text-2xl font-bold text-white">50K+</span>
-                </div>
-                <p className="text-sm text-gray-400 mt-1">Active Students</p>
+            {/* Stats section */}
+            <div className="mt-16 grid grid-cols-3 gap-8 text-center lg:text-left">
+              <div>
+                <div className="text-4xl font-bold">500+</div>
+                <div className="mt-1 text-sm opacity-80">Courses</div>
               </div>
-              <div className="text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start">
-                  <div className="relative">
-                    <Code className="text-cyan-400 mr-2" size={20} />
-                    <div className="absolute -inset-1 bg-cyan-400/20 rounded-full blur-sm"></div>
-                  </div>
-                  <span className="text-2xl font-bold text-white">200+</span>
-                </div>
-                <p className="text-sm text-gray-400 mt-1">Courses</p>
+              <div>
+                <div className="text-4xl font-bold">50K+</div>
+                <div className="mt-1 text-sm opacity-80">Students</div>
               </div>
-              <div className="text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start">
-                  <div className="relative">
-                    <Shield className="text-cyan-400 mr-2" size={20} />
-                    <div className="absolute -inset-1 bg-cyan-400/20 rounded-full blur-sm"></div>
-                  </div>
-                  <span className="text-2xl font-bold text-white">98%</span>
-                </div>
-                <p className="text-sm text-gray-400 mt-1">Success Rate</p>
+              <div>
+                <div className="text-4xl font-bold">200+</div>
+                <div className="mt-1 text-sm opacity-80">Instructors</div>
               </div>
             </div>
           </div>
           
-          {/* Right Content - Banner Slider Carousel */}
-          <div className="md:w-1/2 relative">
-            <div className="relative max-w-md mx-auto h-96">
-              {/* Slider container */}
-              <div className="relative h-full overflow-hidden rounded-xl cyber-border">
-                {bannerSlides.map((slide, index) => (
-                  <div
+          {/* Course Banner Slider */}
+          <div className="mt-16 lg:mt-0 lg:w-1/2 flex justify-center">
+            <div className="w-full max-w-md relative">
+              {/* Slider navigation */}
+              <div className="absolute top-1/2 left-0 right-0 flex justify-between z-10 transform -translate-y-1/2 px-4">
+                <button 
+                  onClick={() => setCurrentSlide((currentSlide - 1 + courses.length) % courses.length)}
+                  className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 backdrop-blur-sm transition duration-300"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button 
+                  onClick={() => setCurrentSlide((currentSlide + 1) % courses.length)}
+                  className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 backdrop-blur-sm transition duration-300"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+              
+              {/* Slider indicators */}
+              <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-10">
+                {courses.map((_, index) => (
+                  <button
                     key={index}
-                    className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-                      index === currentSlide
-                        ? 'translate-x-0'
-                        : index < currentSlide
-                        ? '-translate-x-full'
-                        : 'translate-x-full'
-                    }`}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-3 h-3 rounded-full ${currentSlide === index ? 'bg-white' : 'bg-white bg-opacity-40'}`}
+                  />
+                ))}
+              </div>
+              
+              {/* Course banners */}
+              <div className="overflow-hidden rounded-2xl shadow-xl">
+                {courses.map((course, index) => (
+                  <div
+                    key={course.id}
+                    className={`transition-transform duration-500 ease-in-out ${index === currentSlide ? 'block' : 'hidden'}`}
                   >
-                    <div className={`relative h-full bg-gradient-to-br ${slide.bgGradient} rounded-xl border ${slide.borderColor} p-6 overflow-hidden cyber-card`}>
-                      {/* Hexagon pattern overlay */}
-                      <div className="absolute inset-0 opacity-5 bg-hexagon-pattern"></div>
-                      
-                      {/* Background image with overlay */}
-                      <div className="absolute inset-0 z-0">
+                    <div className="bg-white text-gray-800 rounded-2xl overflow-hidden">
+                      <div className="h-48 overflow-hidden">
                         <img 
-                          src={slide.image} 
-                          alt={slide.title}
-                          className="w-full h-full object-cover opacity-10"
+                          src={course.image} 
+                          alt={course.title}
+                          className="w-full h-full object-cover"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-950/90"></div>
                       </div>
-                      
-                      {/* Content */}
-                      <div className="relative z-10 h-full flex flex-col">
-                        <div className="flex justify-between items-start mb-4">
-                          <div>
-                            <h3 className="text-xl font-bold text-white">{slide.title}</h3>
-                            <p className="text-cyan-400 text-sm">{slide.subtitle}</p>
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-[#103d5d]">{course.title}</h3>
+                        <p className="text-gray-600 mt-2">by {course.instructor}</p>
+                        <div className="flex items-center mt-4">
+                          <div className="flex text-yellow-400">
+                            {[...Array(5)].map((_, i) => (
+                              <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                              </svg>
+                            ))}
                           </div>
-                          <div className="flex items-center bg-cyan-900/20 px-3 py-1 rounded-full glow-cyan">
-                            <Star className="text-cyan-400 mr-1" size={14} fill="currentColor" />
-                            <span className="text-cyan-300 text-sm">{slide.rating}</span>
-                          </div>
+                          <span className="ml-2 text-gray-600">{course.rating}</span>
+                          <span className="mx-2 text-gray-400">•</span>
+                          <span className="text-gray-600">{course.students.toLocaleString()} students</span>
                         </div>
-                        
-                        <p className="text-gray-300 text-sm mb-4 flex-grow">{slide.description}</p>
-                        
-                        <div className="mb-4">
-                          <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-                            <div 
-                              className="h-full bg-gradient-to-r from-cyan-500 to-emerald-500 rounded-full" 
-                              style={{ width: `${slide.progress}%` }}
-                            ></div>
-                          </div>
-                          <div className="flex justify-between text-xs text-gray-400 mt-2">
-                            <span>Progress: {slide.progress}%</span>
-                            <span>{slide.modules}</span>
-                          </div>
+                        <div className="mt-4 flex justify-between items-center">
+                          <span className="text-2xl font-bold text-[#245684]">{course.price}</span>
+                          <button className="px-4 py-2 bg-[#245684] hover:bg-[#1a4066] text-white rounded-md transition duration-300">
+                            Enroll Now
+                          </button>
                         </div>
-                        
-                        <div className="grid grid-cols-2 gap-4 mb-4">
-                          <div className="bg-gray-800/50 p-3 rounded-lg cyber-border-inner">
-                            <p className="text-white text-sm font-medium">Instructor</p>
-                            <p className="text-cyan-400 text-xs">{slide.instructor}</p>
-                          </div>
-                          <div className="bg-gray-800/50 p-3 rounded-lg cyber-border-inner">
-                            <p className="text-white text-sm font-medium">Duration</p>
-                            <p className="text-cyan-400 text-xs">{slide.duration}</p>
-                          </div>
-                        </div>
-                        
-                        <button className="w-full bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-600 hover:to-emerald-600 text-gray-900 py-3 rounded-lg font-bold transition-all duration-300 flex items-center justify-center cyber-button">
-                          <Cpu className="mr-2" size={18} />
-                          <span>Access Course</span>
-                          <ChevronRight className="ml-2" size={18} />
-                        </button>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
-              
-              {/* Navigation arrows */}
-              <button 
-                onClick={prevSlide}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-900/80 hover:bg-cyan-900/50 text-cyan-400 p-2 rounded-full z-20 transition-all duration-300 cyber-border glow-cyan-hover"
-              >
-                <ChevronLeft size={20} />
-              </button>
-              <button 
-                onClick={nextSlide}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-900/80 hover:bg-cyan-900/50 text-cyan-400 p-2 rounded-full z-20 transition-all duration-300 cyber-border glow-cyan-hover"
-              >
-                <ChevronRight size={20} />
-              </button>
-              
-              {/* Indicator dots */}
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-                {bannerSlides.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === currentSlide ? 'bg-cyan-400 scale-125 glow-cyan' : 'bg-gray-600'
-                    }`}
-                  ></button>
-                ))}
-              </div>
-              
-              {/* Slide counter */}
-              <div className="absolute top-4 right-4 bg-gray-900/80 text-cyan-300 text-xs px-2 py-1 rounded-full z-20 cyber-border">
-                {currentSlide + 1} / {bannerSlides.length}
-              </div>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block">
-        <div className="flex flex-col items-center text-cyan-400">
-          <span className="text-sm mb-2">Scroll Down</span>
-          <ChevronDown className="animate-bounce" />
-        </div>
+      {/* Wave divider */}
+      <div className="absolute bottom-0 left-0 w-full">
+        <svg 
+          className="w-full h-16 text-white" 
+          viewBox="0 0 1200 120" 
+          preserveAspectRatio="none"
+        >
+          <path 
+            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" 
+            fill="currentColor"
+          ></path>
+        </svg>
       </div>
-      
-      {/* Custom styles */}
-      <style jsx>{`
-        @keyframes float {
-          0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
-          50% { transform: translateY(-10px) rotate(5deg); opacity: 1; }
-          100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
-        }
-        .animate-float {
-          animation: float 5s ease-in-out infinite;
-        }
-        .bg-grid-pattern {
-          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(103 232 249 / 0.1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
-        }
-        .bg-circuit-pattern {
-          background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2345f7ff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
-        }
-        .bg-hexagon-pattern {
-          background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L100 25V75L50 100L0 75V25L50 0Z' fill='%2345f7ff' fill-opacity='0.03'/%3E%3C/svg%3E");
-          background-size: 50px;
-        }
-        .cyber-border {
-          border: 1px solid rgba(34, 211, 238, 0.2);
-          box-shadow: 0 0 5px rgba(34, 211, 238, 0.1), 
-                      inset 0 0 5px rgba(34, 211, 238, 0.1);
-        }
-        .cyber-border-inner {
-          border: 1px solid rgba(34, 211, 238, 0.1);
-          box-shadow: inset 0 0 5px rgba(34, 211, 238, 0.05);
-        }
-        .cyber-card {
-          box-shadow: 0 0 15px rgba(34, 211, 238, 0.1),
-                      0 0 30px rgba(34, 211, 238, 0.05);
-        }
-        .cyber-button {
-          box-shadow: 0 0 10px rgba(34, 211, 238, 0.4),
-                      0 0 20px rgba(34, 211, 238, 0.2),
-                      0 0 30px rgba(34, 211, 238, 0.1);
-        }
-        .cyber-button:hover {
-          box-shadow: 0 0 15px rgba(34, 211, 238, 0.5),
-                      0 0 25px rgba(34, 211, 238, 0.3),
-                      0 0 40px rgba(34, 211, 238, 0.2);
-        }
-        .glow-cyan {
-          box-shadow: 0 0 5px rgba(34, 211, 238, 0.5);
-        }
-        .glow-cyan-hover:hover {
-          box-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
-        }
-      `}</style>
-    </section>
+    </div>
   );
 };
 
