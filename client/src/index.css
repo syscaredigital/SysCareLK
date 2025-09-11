@@ -11,9 +11,21 @@ body {
 }
 
 @layer components {
-  .sub-menu {
-        @apply absolute top-[4.2rem] p-[15px] rounded-[6px] origin-[50%_-170px] backdrop-blur bg-[#103d5d];
-  }
+  /* Custom styles for the centered mega menu */
+.group\/link .absolute {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Ensure the mega menu doesn't exceed viewport width */
+.max-w-6xl {
+  max-width: 72rem;
+}
+
+/* Smooth transition for dropdown */
+.group\/link .absolute {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
 }
 
 @layer utilities {
