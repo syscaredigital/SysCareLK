@@ -270,7 +270,7 @@ const CoursesSection = () => {
             <div key={course.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
               <div className="h-48 bg-gradient-to-r from-[#103d5d] to-[#245684] p-6 text-white flex flex-col justify-between">
                 <div>
-                  <span className="inline-block px-3 py-1 bg-white bg-opacity-20 rounded-full text-sm">
+                  <span className="inline-block px-3 py-1 bg-white text-[#103d5d] bg-opacity-20 rounded-full text-sm">
                     {course.level}
                   </span>
                 </div>
