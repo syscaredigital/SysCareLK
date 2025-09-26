@@ -68,7 +68,7 @@ const Hero = () => {
               </a>
               <a
                 href="#"
-                className="px-8 py-3 border border-white text-base font-medium rounded-md text-white bg-transparent hover:bg-white hover:bg-opacity-10 md:py-4 md:text-lg md:px-10 transition duration-300"
+                className="px-8 py-3 border border-white text-base font-medium rounded-md text-white bg-transparent hover:bg-white hover:text-[#103d5d] hover:bg-opacity-10 md:py-4 md:text-lg md:px-10 transition duration-300"
               >
                 View Courses
               </a>

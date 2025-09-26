@@ -109,25 +109,25 @@ const CallToAction = () => {
           {/* Left Side - Stats */}
           <div className="lg:w-1/2">
             <div className="grid grid-cols-2 gap-8">
-              <div className="bg-white bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-2xl p-6 border border-white border-opacity-10 shadow-2xl transform hover:-translate-y-1 transition-transform duration-300">
+              <div className="bg-white text-[#103d5d] bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-2xl p-6 border border-white border-opacity-10 shadow-2xl transform hover:-translate-y-1 transition-transform duration-300">
                 <div className="text-5xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">{counters.students}+</div>
                 <div className="text-lg font-medium">Students Trained</div>
               </div>
-              <div className="bg-white bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-2xl p-6 border border-white border-opacity-10 shadow-2xl transform hover:-translate-y-1 transition-transform duration-300">
+              <div className="bg-white text-[#103d5d] bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-2xl p-6 border border-white border-opacity-10 shadow-2xl transform hover:-translate-y-1 transition-transform duration-300">
                 <div className="text-5xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">{counters.trainings}+</div>
                 <div className="text-lg font-medium">Professional Trainings</div>
               </div>
-              <div className="bg-white bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-2xl p-6 border border-white border-opacity-10 shadow-2xl transform hover:-translate-y-1 transition-transform duration-300">
+              <div className="bg-white text-[#103d5d] bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-2xl p-6 border border-white border-opacity-10 shadow-2xl transform hover:-translate-y-1 transition-transform duration-300">
                 <div className="text-5xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">{counters.passingRate}%</div>
                 <div className="text-lg font-medium">Exam Passing Rate</div>
               </div>
-              <div className="bg-white bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-2xl p-6 border border-white border-opacity-10 shadow-2xl transform hover:-translate-y-1 transition-transform duration-300">
+              <div className="bg-white text-[#103d5d] bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-2xl p-6 border border-white border-opacity-10 shadow-2xl transform hover:-translate-y-1 transition-transform duration-300">
                 <div className="text-5xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">{counters.internationalStudents}+</div>
                 <div className="text-lg font-medium">International Students</div>
               </div>
             </div>
             
-            <div className="mt-12 bg-white bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-2xl p-8 border border-white border-opacity-10 shadow-2xl">
+            <div className="mt-12 bg-white text-[#103d5d] bg-opacity-5 backdrop-filter backdrop-blur-lg rounded-2xl p-8 border border-white border-opacity-10 shadow-2xl">
               <h3 className="text-2xl font-bold mb-6 flex items-center">
                 <span className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mr-4">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
