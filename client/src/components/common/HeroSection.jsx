@@ -1,39 +1,30 @@
 import React, { useState, useEffect } from 'react';
-
+import heroImage1 from '../../assets/website_images/hero-image-1.jpg';
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   
   // Sample course data
   const courses = [
-    {
+   
+ {
       id: 1,
-      title: "Web Development Bootcamp",
-      instructor: "Sarah Johnson",
-      rating: 4.8,
-      students: 12500,
-      image: "https://cdn.pixabay.com/photo/2019/10/09/07/28/development-4536630_1280.png",
-      price: "$89.99"
+      
+      image: heroImage1,
+      
     },
     {
       id: 2,
-      title: "Data Science Fundamentals",
-      instructor: "Michael Chen",
-      rating: 4.7,
-      students: 8700,
+    
       image: "https://cdn.pixabay.com/photo/2021/08/04/13/06/software-developer-6521720_1280.jpg",
-      price: "$94.99"
+      
     },
     {
       id: 3,
-      title: "UX/UI Design Masterclass",
-      instructor: "Emma Rodriguez",
-      rating: 4.9,
-      students: 10200,
+      
       image: "https://cdn.pixabay.com/photo/2018/06/18/23/59/design-3483051_1280.jpg",
-      price: "$79.99"
+     
     }
   ];
-
   // Auto-advance slider
   useEffect(() => {
     const interval = setInterval(() => {
@@ -92,7 +83,7 @@ const Hero = () => {
           </div>
           
           {/* Course Banner Slider */}
-          <div className="mt-16 lg:mt-0 lg:w-1/2 flex justify-center">
+          <div className=" mt-16 lg:mt-0 lg:w-1/2 flex justify-center">
             <div className="w-full max-w-md relative">
               {/* Slider navigation */}
               <div className="absolute top-1/2 left-0 right-0 flex justify-between z-10 transform -translate-y-1/2 px-4">
@@ -120,7 +111,7 @@ const Hero = () => {
                   <button
                     key={index}
                     onClick={() => setCurrentSlide(index)}
-                    className={`w-3 h-3 rounded-full ${currentSlide === index ? 'bg-white' : 'bg-white bg-opacity-40'}`}
+                    className={`w-3 h-3 rounded-full ${currentSlide === index ? 'bg-[#103d5d]' : 'bg-white bg-opacity-40'}`}
                   />
                 ))}
               </div>
@@ -141,22 +132,15 @@ const Hero = () => {
                         />
                       </div>
                       <div className="p-6">
-                        <h3 className="text-xl font-bold text-[#103d5d]">{course.title}</h3>
-                        <p className="text-gray-600 mt-2">by {course.instructor}</p>
+                        
                         <div className="flex items-center mt-4">
-                          <div className="flex text-yellow-400">
-                            {[...Array(5)].map((_, i) => (
-                              <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                              </svg>
-                            ))}
-                          </div>
-                          <span className="ml-2 text-gray-600">{course.rating}</span>
-                          <span className="mx-2 text-gray-400">•</span>
-                          <span className="text-gray-600">{course.students.toLocaleString()} students</span>
+                          
+                          
+                          
+                         
                         </div>
                         <div className="mt-4 flex justify-between items-center">
-                          <span className="text-2xl font-bold text-[#245684]">{course.price}</span>
+                          
                           <button className="px-4 py-2 bg-[#245684] hover:bg-[#1a4066] text-white rounded-md transition duration-300">
                             Enroll Now
                           </button>
