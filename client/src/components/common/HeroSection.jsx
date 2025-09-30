@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import heroImage1 from '../../assets/website_images/hero-image-1.jpg';
+import heroImage1 from '../../assets/website_images/heroimage1.jpg';
+import heroImage2 from '../../assets/website_images/heroimage2.jpg';
+import heroImage3 from '../../assets/website_images/heroimage3.jpg';
+
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   
   // Sample course data
   const courses = [
-   
- {
+    {
       id: 1,
-      
       image: heroImage1,
-      
     },
     {
       id: 2,
-    
-      image: "https://cdn.pixabay.com/photo/2021/08/04/13/06/software-developer-6521720_1280.jpg",
-      
+      image: heroImage2,
     },
     {
       id: 3,
-      
-      image: "https://cdn.pixabay.com/photo/2018/06/18/23/59/design-3483051_1280.jpg",
-     
+      image: heroImage3,
     }
   ];
+
   // Auto-advance slider
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,7 +37,7 @@ const Hero = () => {
       <div className="absolute bottom-0 left-0 -ml-40 -mb-40 w-80 h-80 bg-white opacity-5 rounded-full"></div>
       
       <div className="relative max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-        <div className="flex flex-col lg:flex-row items-center">
+        <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Text content */}
           <div className="lg:w-1/2 text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
@@ -55,7 +52,7 @@ const Hero = () => {
                 href="#"
                 className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#245684] hover:bg-[#1a4066] shadow-md md:py-4 md:text-lg md:px-10 transition duration-300"
               >
-                Start Learning
+                Enroll Now
               </a>
               <a
                 href="#"
@@ -65,31 +62,16 @@ const Hero = () => {
               </a>
             </div>
             
-            {/* Stats section */}
-            <div className="mt-16 grid grid-cols-3 gap-8 text-center lg:text-left">
-              <div>
-                <div className="text-4xl font-bold">500+</div>
-                <div className="mt-1 text-sm opacity-80">Courses</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold">50K+</div>
-                <div className="mt-1 text-sm opacity-80">Students</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold">200+</div>
-                <div className="mt-1 text-sm opacity-80">Instructors</div>
-              </div>
-            </div>
           </div>
           
-          {/* Course Banner Slider */}
-          <div className=" mt-16 lg:mt-0 lg:w-1/2 flex justify-center">
-            <div className="w-full max-w-md relative">
+          {/* Course Banner Slider - Optimized for 1080x1080 images */}
+          <div className="lg:w-1/2 flex justify-center">
+            <div className="w-full max-w-lg relative">
               {/* Slider navigation */}
               <div className="absolute top-1/2 left-0 right-0 flex justify-between z-10 transform -translate-y-1/2 px-4">
                 <button 
                   onClick={() => setCurrentSlide((currentSlide - 1 + courses.length) % courses.length)}
-                  className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 backdrop-blur-sm transition duration-300"
+                  className="bg-[#103d5d] bg-opacity-20 hover:bg-opacity-30 rounded-full p-3 backdrop-blur-sm transition duration-300"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -97,7 +79,7 @@ const Hero = () => {
                 </button>
                 <button 
                   onClick={() => setCurrentSlide((currentSlide + 1) % courses.length)}
-                  className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 backdrop-blur-sm transition duration-300"
+                  className="bg-[#103d5d] bg-opacity-10 hover:bg-opacity-30 rounded-full p-3 backdrop-blur-sm transition duration-300"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -106,46 +88,39 @@ const Hero = () => {
               </div>
               
               {/* Slider indicators */}
-              <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-10">
+              <div className="absolute bottom-6 left-0 right-0 flex justify-center space-x-3 z-10">
                 {courses.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentSlide(index)}
-                    className={`w-3 h-3 rounded-full ${currentSlide === index ? 'bg-[#103d5d]' : 'bg-white bg-opacity-40'}`}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      currentSlide === index ? 'bg-white scale-125' : 'bg-white bg-opacity-40'
+                    }`}
                   />
                 ))}
               </div>
               
-              {/* Course banners */}
-              <div className="overflow-hidden rounded-2xl shadow-xl">
+              {/* Course banners - Square container for 1080x1080 images */}
+              <div className="overflow-hidden rounded-2xl shadow-2xl">
                 {courses.map((course, index) => (
                   <div
                     key={course.id}
-                    className={`transition-transform duration-500 ease-in-out ${index === currentSlide ? 'block' : 'hidden'}`}
+                    className={`transition-transform duration-500 ease-in-out ${
+                      index === currentSlide ? 'block' : 'hidden'
+                    }`}
                   >
-                    <div className="bg-white text-gray-800 rounded-2xl overflow-hidden">
-                      <div className="h-48 overflow-hidden">
-                        <img 
-                          src={course.image} 
-                          alt={course.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="p-6">
-                        
-                        <div className="flex items-center mt-4">
-                          
-                          
-                          
-                         
-                        </div>
-                        <div className="mt-4 flex justify-between items-center">
-                          
-                          <button className="px-4 py-2 bg-[#245684] hover:bg-[#1a4066] text-white rounded-md transition duration-300">
-                            Enroll Now
-                          </button>
-                        </div>
-                      </div>
+                    <div className="relative w-full aspect-square rounded-2xl overflow-hidden">
+                      {/* Square image container */}
+                      <img 
+                        src={course.image} 
+                        alt={`Course ${course.id}`}
+                        className="w-full h-full object-cover"
+                      />
+                      
+                      {/* Gradient overlay for better button visibility */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                      
+                      
                     </div>
                   </div>
                 ))}

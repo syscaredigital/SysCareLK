@@ -11,11 +11,13 @@ import TestimonialSection from '../components/common/TestimonialSection';
 import NewsCarousel from '../components/common/NewsSection';
 import SocialMediaFeed from '../components/common/SocialMediaSection';
 import Footer from '../components/common/FooterSection';
+import StudentPlatformsCompact from '../components/common/BenefitSection';
 const Home = () => {
   return (
     <div  className="min-h-screen bg-white">
       <NavigationBar/>
        <Hero/>
+       <StudentPlatformsCompact/>
       <AboutUs/>
       <CoursesSection/>
       <UpcomingCourses/>

@@ -7,6 +7,7 @@ import Schedular from './pages/Schedular.jsx';
 import ContactUs from './pages/contactUs.jsx';
 import ProfessionalCourseLists from './pages/ProfessionalCourseLists.jsx';
 import CourseDetails from './pages/courseDetails.jsx';
+import AdminDashboard from './pages/admin/dashboard.jsx';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path='/SysCare-Professional-Courses' element= { <ProfessionalCourseLists/ > } />
         <Route path='/SysCare-Professional-Courses/:input' element={<ProfessionalCourseLists />} />
         <Route path='/SysCare-Course-Details/:id' element={<CourseDetails />} />
+        <Route path='/SysCare-Admin' element={< AdminDashboard />} />
 
 
 
