@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import heroImage1 from '../../assets/website_images/heroimage1.jpg';
-import heroImage2 from '../../assets/website_images/heroimage2.jpg';
-import heroImage3 from '../../assets/website_images/heroimage3.jpg';
+import heroImage1 from '../../assets/website_images/heroImage1.jpg';
+import heroImage2 from '../../assets/website_images/heroImage2.jpg';
+import heroImage3 from '../../assets/website_images/heroImage3.jpg';
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
