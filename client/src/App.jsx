@@ -8,6 +8,7 @@ import ContactUs from './pages/contactUs.jsx';
 import ProfessionalCourseLists from './pages/ProfessionalCourseLists.jsx';
 import CourseDetails from './pages/courseDetails.jsx';
 import AdminDashboard from './pages/admin/adminDashboard.jsx';
+import CounselorDashboard from './pages/coordinator/CounselorDashboard.jsx';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path='/SysCare-Professional-Courses/:input' element={<ProfessionalCourseLists />} />
         <Route path='/SysCare-Course-Details/:id' element={<CourseDetails />} />
         <Route path='/SysCare-Admin' element={< AdminDashboard />} />
+        <Route path='/SysCare-Cordinator-Admin' element={< CounselorDashboard />} />
 
 
 
