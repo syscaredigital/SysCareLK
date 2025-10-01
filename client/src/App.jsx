@@ -7,7 +7,7 @@ import Schedular from './pages/Schedular.jsx';
 import ContactUs from './pages/contactUs.jsx';
 import ProfessionalCourseLists from './pages/ProfessionalCourseLists.jsx';
 import CourseDetails from './pages/courseDetails.jsx';
-import AdminDashboard from './pages/admin/dashboard.jsx';
+import AdminDashboard from './pages/admin/adminDashboard.jsx';
 
 const App = () => {
   return (
